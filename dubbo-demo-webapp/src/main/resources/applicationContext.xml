@@ -1,0 +1,24 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:dubbo="http://code.alibabatech.com/schema/dubbo" xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context-3.2.xsd
+        http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.2.xsd
+		http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+
+    <!-- 扫描bean -->
+    <context:component-scan base-package="tk.rotk.**" annotation-config="true"/>
+
+    <context:annotation-config/>
+
+    <dubbo:application name="dubbo-demo"/>
+    <dubbo:consumer filter="default" group="dubbo-demo"/>
+    <dubbo:registry check="false" address="zookeeper://127.0.0.1:2181"/>
+
+    <dubbo:reference id="testService" timeout="10000" retries="0"
+                     interface="tk.rotk.study.dubbo.demo.api.TestService" check="false"/>
+
+</beans>
